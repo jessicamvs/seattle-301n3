@@ -21,7 +21,7 @@ Article.prototype.toHtml = function() {
 
   // Display the date as a relative number of "days ago":
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago')
-  $newArticle.find('article-body').html(this.body);
+  $newArticle.find('.article-body').html(this.body);
   $newArticle.append('<hr>');
 
   $newArticle.attr('class', 'Article');
