@@ -94,11 +94,9 @@ articleView.setTeasers = function() {
   //       Ideally, we'd attach this as just 1 event handler on the #articles section, and let it
   //       process any .read-on clicks that happen within child nodes.
   $('#articles').on('click', 'a', function(e){
-    if ($(this).attr('class') === 'read-on') {
       e.preventDefault();
       $(this).parent().find('.article-body').children().show();
       $(this).hide();
-    }
   });
 };
 
