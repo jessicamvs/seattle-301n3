@@ -70,15 +70,15 @@ articleView.handleCategoryFilter = function() {
 };
 
 articleView.handleMainNav = function() {
-  // TODO: Add an event handler to .main-nav element that will power the Tabs feature.
+  // DONE: Add an event handler to .main-nav element that will power the Tabs feature.
   //       Clicking any .tab element should hide all the .tab-content sections, and then reveal the
   //       single .tab-content section that is associated with the clicked .tab element.
   //       So: You need to dynamically build a selector string with the correct ID, based on the
   //       data available to you on the .tab element that was clicked.
-  $('.main-nav').on('click', function(){
-    var $tabSelection = $(this).attr('data-content');
-    console.log($tabSelection);
+  $('.main-nav').on('click', 'li', function(){
     $('.tab-content').hide();
+    var $tabSelection = $(this).data('content');
+    console.log($tabSelection);
     $('#' + $tabSelection).show();
   }  /* CODE GOES HERE */);
 
@@ -93,7 +93,13 @@ articleView.setTeasers = function() {
   //       "Read On" link once it has been clicked. Be sure to prevent the default link-click action!
   //       Ideally, we'd attach this as just 1 event handler on the #articles section, and let it
   //       process any .read-on clicks that happen within child nodes.
-
+  $('#articles').on('click', function(e){
+    e.preventDefault();
+    if (this.class === 'read-on') {
+      $('.article-body *:nth-of-type(n+2)').show();
+    }
+//    $(this '[class="read-on"]').hide();
+  });
 };
 
 // TODO: Call all of the above functions, once we are sure the DOM is ready.
@@ -102,4 +108,5 @@ articleView.populateFilters();
 articleView.handleAuthorFilter();
 articleView.handleCategoryFilter();
 articleView.handleMainNav();
+articleView.setTeasers();
 // });

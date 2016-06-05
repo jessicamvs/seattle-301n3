@@ -2,6 +2,9 @@
 
 .site-header {
   padding: .1em;
+  background: #fd746c;
+  background: -webkit-linear-gradient(to left, #fd746c , #ff9068);
+  background: linear-gradient(to left, #fd746c , #ff9068);
 }
 
 .main-nav {
@@ -17,15 +20,16 @@
   border-bottom: 1px solid #ccc;
 }
 
-/* TODO: Style the filters so they look good on small screens:
+/* Done: Style the filters so they look good on small screens:
     Use the full width, and remove the list bullet. */
 
 #filters {
   padding: 0;
+  width: 100%;
 }
 
 #filters select {
-
+  list-style: none;
 }
 
 .template {
