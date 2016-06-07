@@ -1,10 +1,13 @@
-/* TODO: Add a rule for images, so they never exceed their container's width. */
-
+/* DONE: Add a rule for images, so they never exceed their container's width. */
 
 body {
   line-height: 1.5;
   font-size: 100%;
   color: #313131;
+}
+
+img {
+  max-width: 100%;
 }
 
 hr {
