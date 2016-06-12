@@ -27,13 +27,9 @@ Article.prototype.toHtml = function() {
   //   The result is added to the object as a new property, which can then be referenced by key in the template.
   //   For example, you might want to display how old a post is, or say "(draft)" if it has no publication date:
 
-  var context = {
-    data: rawData
-  };
-
   // DONE: Use the function that Handlebars gave you to return your filled-in html template for THIS article.
-  var theCompiled = theTemplate(context);
-  $('#articles').append(theCompiled);
+  var theCompiled = theTemplate(this);
+  return theCompiled
 };
 
 rawData.sort(function(a,b) {
@@ -46,12 +42,4 @@ rawData.forEach(function(ele) {
 
 articles.forEach(function(a){
   $('#articles').append(a.toHtml());
-});
-
-articles.forEach(function(a){
-  $('#articles').append(a.toHtml());
-});
-
-$(document).ready(function() {
-  Article.prototype.toHtml();
 });
