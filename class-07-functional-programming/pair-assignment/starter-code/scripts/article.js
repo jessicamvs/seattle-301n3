@@ -1,5 +1,6 @@
-// TODO: Wrap the entire contents of this file in an IIFE.
+// DONE: Wrap the entire contents of this file in an IIFE.
 // Pass in to the IIFE a module, upon which objects can be attached for later access.
+(function(module) {
 function Article (opts) {
   this.author = opts.author;
   this.authorUrl = opts.authorUrl;
@@ -79,23 +80,24 @@ Article.allAuthors = function() {
 };
 
 Article.numWordsByAuthor = function() {
-  // TODO: Transform each author string into an object with 2 properties: One for
+  // DONE: Transform each author string into an object with 2 properties: One for
   // the author's name, and one for the total number of words across all articles written by the specified author.
   return Article.allAuthors().map(function(author) {
     return {
-      authorStat: author,
-      totalWordsWritten: Article.all.filter(function(ele) {
-        if (ele.author === author) {
-          return ele;
-        };
-      })
-      .reduce(function(a, b) {
-        return a + b;
-      })
-      // return Article.all.map(function(article) {
-      //   return article.body.split(" ").length;// Get the total number of words in this article
-      // })
-      // someKey: someValOrFunctionCall().map(...).reduce(...), ...
-    };
-  });
-};
+      name: author,
+      numWords:
+        Article.all.reduce(function(a, b) {
+          if (b.author === author) {
+            a.push(b.body.split(" ").length);
+          };
+          return a;
+        }, [])
+        .reduce(function(a, b) {
+          return a + b;
+        }, 0)
+      }
+    })
+  };
+
+  module.Article = Article;
+})(window);
