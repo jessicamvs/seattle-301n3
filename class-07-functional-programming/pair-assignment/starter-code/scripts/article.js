@@ -39,7 +39,7 @@ Article.loadAll = function(rawData) {
 // This function will retrieve the data from either a local or remote source,
 // and process it, then hand off control to the View.
 
-// TODO: Refactor this function, and provide it with a parameter of a callback function
+// DONE: Refactor this function, and provide it with a parameter of a callback function
 //(for now just a placeholder, but to be referenced at call time as a view function)
 // to execute once the loading of articles is done. We do this because we might want
 // to call other view functions, and not just this initIndexPage() that we are replacing.
@@ -81,6 +81,7 @@ Article.allAuthors = function() {
 Article.numWordsByAuthor = function() {
   // TODO: Transform each author string into an object with 2 properties: One for
   // the author's name, and one for the total number of words across all articles written by the specified author.
+
   return Article.allAuthors().map(function(author) {
     return {
       // someKey: someValOrFunctionCall().map(...).reduce(...), ...
