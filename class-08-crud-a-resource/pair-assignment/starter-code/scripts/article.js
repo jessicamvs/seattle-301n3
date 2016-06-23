@@ -33,13 +33,12 @@
   // DONE: Use correct SQL syntax to delete all records from the articles table.
   Article.truncateTable = function(callback) {
     webDB.execute(
-      'DELETE * FROM Article;', // <----finish the command here, inside the quotes.
+      'DELETE FROM Article;', // <----finish the command here, inside the quotes.
       callback
     );
   };
 
-
-  // TODO: Insert an article instance into the database:
+  // DONE: Insert an article instance into the database:
   Article.prototype.insertRecord = function(callback) {
     webDB.execute(
       [
@@ -52,24 +51,25 @@
     );
   };
 
-  // TODO: Delete an article instance from the database:
+  // DONE: Delete an article instance from the database:
   Article.prototype.deleteRecord = function(callback) {
     webDB.execute(
       [
         {
-          /* 'DELETE FROM Article WHERE ;'*/
+          'sql': 'DELETE FROM Article WHERE title = ?;',
+          'data': [this.title],
         }
       ],
       callback
     );
   };
 
-  // TODO: Update an article instance, overwriting it's properties into the corresponding record in the database:
+  // DONE: Update an article instance, overwriting it's properties into the corresponding record in the database:
   Article.prototype.updateRecord = function(callback) {
     webDB.execute(
       [
         {
-          /*'UPDATE Article SET title = , category = , author = , authorUrl = , publishedOn = , body = WHERE ; '*/
+          'sql': 'UPDATE Article SET title = "This is a new title" WHERE id = 3;',
         }
       ],
       callback
@@ -98,7 +98,7 @@
           // Cache the json, so we don't need to request it next time:
           rawData.forEach(function(item) {
             var article = new Article(item); // Instantiate an article based on item from JSON
-            // TODO: Cache the newly-instantiated article in the DB: (what can we call on each 'article'?)
+            // DONE: Cache the newly-instantiated article in the DB: (what can we call on each 'article'?)
             article.insertRecord();
 
           });
