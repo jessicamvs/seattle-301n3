@@ -69,7 +69,9 @@
     webDB.execute(
       [
         {
-          'sql': 'UPDATE Article SET title = "This is a new title" WHERE id = 3;',
+          'sql': 'UPDATE Article SET title = ?, category = ?, author = ?, authorUrl = ?, publishedOn = ?, body = ? WHERE id = ?;',
+          'data': [this.title, this.category, this.author, this.authorUrl, this.publishedOn, this.body, this.id],
+
         }
       ],
       callback
