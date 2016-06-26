@@ -1,4 +1,4 @@
-// (function(module) {
+(function(module) {
 
   var search = {};
 
@@ -58,17 +58,9 @@
     $('#city-select').on('change', function(e) {
       e.preventDefault();
       console.log(e.target.value);
-      webDB.execute('SELECT latitude, longitude, city FROM zips WHERE city="' + e.target.value + '";', function(rows) {
-          var results = rows.map(function(ele) {
-            return {
-              lat: ele.latitude,
-              lng: ele.longitude
-            }
-          })
-          results.forEach(function(ele) {
-            // console.log(ele);
-            initMap(ele, "lololol");
-          })
+      console.log($('#state-select').val());
+      webDB.execute('SELECT latitude, longitude FROM zips WHERE city="' + e.target.value + '" AND state="' + $('#state-select').val() + '";', function(rows) {
+        initMap(rows);
       });
     });
   }
@@ -78,7 +70,7 @@
   search.zipSearch();
   search.citySearch();
   // DONE: Write the code to populate your filters, and enable the search queries here in search.js
-  // TODO: You will also interact with the map.js file here
+  // DONE: You will also interact with the map.js file here
 
 
-// })(window)
+})(window)
