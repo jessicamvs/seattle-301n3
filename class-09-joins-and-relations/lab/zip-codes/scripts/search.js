@@ -35,11 +35,17 @@
     $('form').on('submit', function(e) {
       e.preventDefault();
       console.log(e.target.zipEntry.value);
-      webDB.execute('SELECT city, zip FROM zips WHERE zip="' + e.target.zipEntry.value + '";', function(rows) {
-        rows.forEach(function(ele) {
-          console.log(ele);
-        });
+      webDB.execute('SELECT latitude, longitude FROM zips WHERE zip="' + e.target.zipEntry.value + '";', function(rows) {
+        console.log(rows);
+        if (rows.length) {
+          initMap(rows[0]);
+        } else {
+          $('form').append('<p class="red">*Invalid ZIP code.</p>');
+        }
       });
+      // .fail(function(error) {
+      //   console.log(error);
+      // });
     });
   };
 
