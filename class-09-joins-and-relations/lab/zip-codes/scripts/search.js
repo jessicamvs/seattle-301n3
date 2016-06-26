@@ -35,7 +35,7 @@
     $('form').on('submit', function(e) {
       e.preventDefault();
       console.log(e.target.zipEntry.value);
-      webDB.execute('SELECT latitude, longitude FROM zips WHERE zip="' + e.target.zipEntry.value + '";', function(rows) {
+      webDB.execute('SELECT latitude, longitude, city FROM zips WHERE zip="' + e.target.zipEntry.value + '";', function(rows) {
         console.log(rows);
         console.log(rows[0]);
         if (rows.length) {
@@ -45,8 +45,8 @@
               lng: ele.longitude
             }
           })
-          console.log(results[0]);
-          initMap(results[0]);
+          console.log(rows[0].city);
+          initMap(results[0], rows[0].city);
         } else {
           $('form').append('<p class="red">*Invalid ZIP code.</p>');
         }
@@ -54,9 +54,29 @@
     });
   };
 
+  search.citySearch = function() {
+    $('#city-select').on('change', function(e) {
+      e.preventDefault();
+      console.log(e.target.value);
+      webDB.execute('SELECT latitude, longitude, city FROM zips WHERE city="' + e.target.value + '";', function(rows) {
+          var results = rows.map(function(ele) {
+            return {
+              lat: ele.latitude,
+              lng: ele.longitude
+            }
+          })
+          results.forEach(function(ele) {
+            // console.log(ele);
+            initMap(ele, "lololol");
+          })
+      });
+    });
+  }
+
   search.populateStates();
   search.stateSelect();
   search.zipSearch();
+  search.citySearch();
   // DONE: Write the code to populate your filters, and enable the search queries here in search.js
   // TODO: You will also interact with the map.js file here
 
