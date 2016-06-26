@@ -14,34 +14,39 @@
   };
 
   search.populateCities = function(rows) {
-    // webDB.execute('SELECT DISTINCT city FROM zips ORDER BY city ASC;', function(rows) {
-    //   console.log(rows.length);
-      if(rows.length) {
-        rows.forEach(function(ele) {
-          $('#city-select').append('<option value="' + ele.city + '">' + ele.city + '</option>');
-        });
-      };
-    // });
+    if(rows.length) {
+      rows.forEach(function(ele) {
+        $('#city-select').append('<option value="' + ele.city + '">' + ele.city + '</option>');
+      });
+    };
   };
 
   search.stateSelect = function() {
     $('#state-select').on('change', function() {
-      console.log($('option [value="city"]'));
       $('#selectCity').siblings().remove();
-
       console.log(this.value);
-      webDB.execute('SELECT city FROM zips WHERE state = "'+ this.value + '" ORDER BY city ASC;', function(rows) {
+      webDB.execute('SELECT DISTINCT city FROM zips WHERE state = "' + this.value + '" ORDER BY city ASC;', function(rows) {
         search.populateCities(rows);
       });
-    })
-  }
+    });
+  };
 
-
-
+  search.zipSearch = function() {
+    $('form').on('submit', function(e) {
+      e.preventDefault();
+      console.log(e.target.zipEntry.value);
+      webDB.execute('SELECT city, zip FROM zips WHERE zip="' + e.target.zipEntry.value + '";', function(rows) {
+        rows.forEach(function(ele) {
+          console.log(ele);
+        });
+      });
+    });
+  };
 
   search.populateStates();
   search.stateSelect();
-  // TODO: Write the code to populate your filters, and enable the search queries here in search.js
+  search.zipSearch();
+  // DONE: Write the code to populate your filters, and enable the search queries here in search.js
   // TODO: You will also interact with the map.js file here
 
 
