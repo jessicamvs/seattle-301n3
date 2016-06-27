@@ -36,17 +36,8 @@
       e.preventDefault();
       console.log(e.target.zipEntry.value);
       webDB.execute('SELECT latitude, longitude, city FROM zips WHERE zip="' + e.target.zipEntry.value + '";', function(rows) {
-        console.log(rows);
-        console.log(rows[0]);
         if (rows.length) {
-          var results = rows.map(function(ele) {
-            return {
-              lat: ele.latitude,
-              lng: ele.longitude
-            }
-          })
-          console.log(rows[0].city);
-          initMap(results[0], rows[0].city);
+          initMap(rows);
         } else {
           $('form').append('<p class="red">*Invalid ZIP code.</p>');
         }
