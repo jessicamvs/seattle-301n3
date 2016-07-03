@@ -1,5 +1,8 @@
 (function(module) {
   var articlesController = {};
+  Article.createTable();
+  Article.fetchAll(articleView.initIndexPage);
+
 
   // TODO: Create the `articles` table when the controller first loads, with the code that used to be in index.html:
 
