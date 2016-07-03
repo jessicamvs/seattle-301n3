@@ -2,8 +2,6 @@
   var articlesController = {};
   Article.createTable();
   Article.fetchAll(articleView.initIndexPage);
-  $('.tab-content').hide();
-  $('#articles').show();
 
 
   // DONE: Create the `articles` table when the controller first loads, with the code that used to be in index.html:
@@ -12,6 +10,8 @@
   // code that used to be in index.html.
   // DONE: Also be sure to hide all the main section elements, and reveal the #articles section:
   articlesController.index = function() {
+    $('.tab-content').hide();
+    $('#articles').show();
 
   };
 
