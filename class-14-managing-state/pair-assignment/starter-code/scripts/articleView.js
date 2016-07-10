@@ -13,6 +13,11 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // ANSWER: this method is populating the dropdown menus for the filters.  it is creating 2 variables.  one is compiling the Handlebars template, the other is creating a new object based on a .map function and putting the author name in the drop down.  there's a conditional that verifies that if the author name is not in the list, append it to the list.
+
+  // then it does the same thing with the categories.
+
+  // populateFilters gets called in the articleView.index method furhter down the page.
   articleView.populateFilters = function() {
     var options,
       template = Handlebars.compile($('#option-template').text());
@@ -38,6 +43,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+//Answer: This method is handles the functionality of the article filters. There is an event listener on the ul with an id of filter. This ul contains both the selects for filtering by author and by category. A callback is invoked when a change event takes place on a select element. The value of resource is the id with '-filter' replaced with an empty string. The page method is now invoked with a concatanated string passed in as the argument. The first argument will be /author/somevalue or /category/somevalue. Somevalue will be the value that was selected with any whitespace replaced with + like author+name. Articles with the same category or author will now be all that is displayed.  This method is invoked in articleView.index.
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       resource = this.id.replace('-filter', '');
@@ -124,6 +130,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // ANSWER: this function is targeting the element with id of articles.  it first shows the element, then hides all siblings of that element.  next it looks for any element with id's of articles and article. it removes that element, then steps into a forEach loop, appending each item/article it loops over.  this gets called in articleController.js within the articlesController.index function.
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
@@ -134,6 +141,7 @@
 
     articleView.populateFilters();
     // COMMENT: What does this method do?  What is it's execution path?
+    // ANSWER: these call both populateFilters and handleFilters methods.
     articleView.handleFilters();
 
     // DONE: Replace setTeasers with just the truncation logic, if needed:
